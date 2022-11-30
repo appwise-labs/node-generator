@@ -18,7 +18,7 @@ export class ${pascalCase}Transformer {
       uuid: ${camelCase}.uuid,
       createdAt: ${camelCase}.createdAt.toISOString(),
       updatedAt: ${camelCase}.updatedAt.toISOString(),
-      deletedAt: ${camelCase}.deletedAt?.toISOString() ?? null,
+      deletedAt: ${camelCase}.deletedAt?.toISOString() ?? null
     }
   }
 

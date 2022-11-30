@@ -1,6 +1,7 @@
 {
   "name": "@appwise/node-generator",
-  "version": "0.1.0",
+  "version": "0.1.2",
+  "bin": "dist/index.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "",

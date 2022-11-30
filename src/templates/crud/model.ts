@@ -14,5 +14,6 @@ export class ${pascalCase} extends BaseEntity {
 
   @DeleteDateColumn()
   deletedAt: Date | null
-}`
+}
+`
 }
