@@ -17,7 +17,7 @@ async function checkPreconditions (base: string, entityName: string): Promise<vo
   await fs.stat(base)
     .catch(() => { throw new Error(`Base directory '${base}' does not exist`) })
 
-  const result = await fs.stat(`${base}/${entityName}`).catch(() => null)
+  const result = await fs.stat(`${base}/${entityName}s`).catch(() => null)
 
   if (result != null) throw new Error(`Entity "${entityName}" already exists`)
 }
@@ -29,8 +29,8 @@ async function copyTemplate (base: string, entityName: string): Promise<void> {
     template: (kebabCase: string, pascalCase: string, camelCase: string) => string
   }): Promise<void> => {
     const dir = options.dir == null
-      ? `${base}/${entityName}`
-      : `${base}/${entityName}/${options.dir}`
+      ? `${base}/${entityName}s`
+      : `${base}/${entityName}s/${options.dir}`
 
     if (options.dir != null) await fs.mkdir(dir)
 
@@ -39,7 +39,7 @@ async function copyTemplate (base: string, entityName: string): Promise<void> {
     await fs.writeFile(`${dir}/${options.name}`, content)
   }
 
-  await fs.mkdir(`${base}/${entityName}`)
+  await fs.mkdir(`${base}/${entityName}s`)
 
   await placeFile({ dir: 'controllers', name: `${entityName}.controller.ts`, template: controller })
   await placeFile({ dir: 'dtos', name: `create-${entityName}.dto.ts`, template: dto })
