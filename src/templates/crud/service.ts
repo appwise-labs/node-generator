@@ -12,17 +12,12 @@ export interface ${pascalCase}Service {
 
 export class ${pascalCase}DefaultService implements ${pascalCase}Service {
   async get${pascalCase}s (): Promise<${pascalCase}[]> {
-    return await ${pascalCase}.find({
-      withDeleted: true,
-      relations: ['manager', 'departments']
-    })
+    return await ${pascalCase}.find()
   }
 
   async get${pascalCase} (uuid: string): Promise<${pascalCase}> {
     return await ${pascalCase}.findOneOrFail({
-      withDeleted: true,
-      where: { uuid },
-      relations: ['manager', 'departments', 'departments.departmentStaff']
+      where: { uuid }
     })
   }
 
