@@ -1,7 +1,9 @@
-export const index = (kebabCase: string, _pascalCase: string, _camelCase: string): string => {
-  return `export * from './routers/${kebabCase}.router'
-export * from './models/${kebabCase}.model'
-export * from './transformers/${kebabCase}.transformer'
-export * from './services/${kebabCase}.service'
+import { CaseTransformer } from '../..'
+
+export const index = (transformer: CaseTransformer): string => {
+  return `export * from './routers/${transformer.kebabCase}.router'
+export * from './models/${transformer.kebabCase}.model'
+export * from './transformers/${transformer.kebabCase}.transformer'
+export * from './services/${transformer.kebabCase}.service'
 `
 }

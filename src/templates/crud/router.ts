@@ -1,17 +1,19 @@
-export const router = (kebabCase: string, pascalCase: string, camelCase: string): string => {
+import { CaseTransformer } from '../..'
+
+export const router = (transformer: CaseTransformer): string => {
   return `import { DTORouter } from '@appwise/express-dto-router'
-import { ${pascalCase}Controller } from '../controllers/${kebabCase}.controller'
-import { Create${pascalCase}DTO } from '../dtos/create-${kebabCase}.dto'
+import { ${transformer.pascalCase}Controller } from '../controllers/${transformer.kebabCase}.controller'
+import { Create${transformer.pascalCase}DTO } from '../dtos/create-${transformer.kebabCase}.dto'
 
-export const ${camelCase}Router = new DTORouter()
+export const ${transformer.camelCase}Router = new DTORouter()
 
-const ${camelCase}Controller = new ${pascalCase}Controller()
+const ${transformer.camelCase}Controller = new ${transformer.pascalCase}Controller()
 
-${camelCase}Router.get('/', ${camelCase}Controller.get${pascalCase}s)
-${camelCase}Router.post('/', Create${pascalCase}DTO, ${camelCase}Controller.create${pascalCase})
+${transformer.camelCase}Router.get('/', ${transformer.camelCase}Controller.get${transformer.pascalCase}s)
+${transformer.camelCase}Router.post('/', Create${transformer.pascalCase}DTO, ${transformer.camelCase}Controller.create${transformer.pascalCase})
 
-${camelCase}Router.get('/:${camelCase}', ${camelCase}Controller.get${pascalCase})
-${camelCase}Router.post('/:${camelCase}', Create${pascalCase}DTO, ${camelCase}Controller.update${pascalCase})
-${camelCase}Router.delete('/:${camelCase}', ${camelCase}Controller.delete${pascalCase})
+${transformer.camelCase}Router.get('/:${transformer.camelCase}', ${transformer.camelCase}Controller.get${transformer.pascalCase})
+${transformer.camelCase}Router.post('/:${transformer.camelCase}', Create${transformer.pascalCase}DTO, ${transformer.camelCase}Controller.update${transformer.pascalCase})
+${transformer.camelCase}Router.delete('/:${transformer.camelCase}', ${transformer.camelCase}Controller.delete${transformer.pascalCase})
 `
 }

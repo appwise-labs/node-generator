@@ -1,46 +1,48 @@
-export const service = (kebabCase: string, pascalCase: string, camelCase: string): string => {
-  return `import { Create${pascalCase}DTO } from '../dtos/create-${kebabCase}.dto'
-import { ${pascalCase} } from '../models/${kebabCase}.model'
+import { CaseTransformer } from '../..'
 
-export interface ${pascalCase}Service {
-  get${pascalCase}s: () => Promise<${pascalCase}[]>
-  get${pascalCase}: (uuid: string) => Promise<${pascalCase}>
-  create${pascalCase}: (dto: Create${pascalCase}DTO) => Promise<${pascalCase}>
-  update${pascalCase}: (uuid: string, dto: Create${pascalCase}DTO) => Promise<${pascalCase}>
-  delete${pascalCase}: (uuid: string) => Promise<void>
+export const service = (transformer: CaseTransformer): string => {
+  return `import { Create${transformer.pascalCase}DTO } from '../dtos/create-${transformer.kebabCase}.dto'
+import { ${transformer.pascalCase} } from '../models/${transformer.kebabCase}.model'
+
+export interface ${transformer.pascalCase}Service {
+  get${transformer.pascalCase}s: () => Promise<${transformer.pascalCase}[]>
+  get${transformer.pascalCase}: (uuid: string) => Promise<${transformer.pascalCase}>
+  create${transformer.pascalCase}: (dto: Create${transformer.pascalCase}DTO) => Promise<${transformer.pascalCase}>
+  update${transformer.pascalCase}: (uuid: string, dto: Create${transformer.pascalCase}DTO) => Promise<${transformer.pascalCase}>
+  delete${transformer.pascalCase}: (uuid: string) => Promise<void>
 }
 
-export class ${pascalCase}DefaultService implements ${pascalCase}Service {
-  async get${pascalCase}s (): Promise<${pascalCase}[]> {
-    return await ${pascalCase}.find()
+export class ${transformer.pascalCase}DefaultService implements ${transformer.pascalCase}Service {
+  async get${transformer.pascalCase}s (): Promise<${transformer.pascalCase}[]> {
+    return await ${transformer.pascalCase}.find()
   }
 
-  async get${pascalCase} (uuid: string): Promise<${pascalCase}> {
-    return await ${pascalCase}.findOneOrFail({
+  async get${transformer.pascalCase} (uuid: string): Promise<${transformer.pascalCase}> {
+    return await ${transformer.pascalCase}.findOneOrFail({
       where: { uuid }
     })
   }
 
-  async create${pascalCase} (dto: Create${pascalCase}DTO): Promise<${pascalCase}> {
-    const ${camelCase} = ${pascalCase}.create(dto)
+  async create${transformer.pascalCase} (dto: Create${transformer.pascalCase}DTO): Promise<${transformer.pascalCase}> {
+    const ${transformer.camelCase} = ${transformer.pascalCase}.create(dto)
 
-    await ${camelCase}.save()
+    await ${transformer.camelCase}.save()
 
-    return await this.get${pascalCase}(${camelCase}.uuid)
+    return await this.get${transformer.pascalCase}(${transformer.camelCase}.uuid)
   }
 
-  async update${pascalCase} (uuid: string, dto: Create${pascalCase}DTO): Promise<${pascalCase}> {
-    const ${camelCase} = await this.get${pascalCase}(uuid)
+  async update${transformer.pascalCase} (uuid: string, dto: Create${transformer.pascalCase}DTO): Promise<${transformer.pascalCase}> {
+    const ${transformer.camelCase} = await this.get${transformer.pascalCase}(uuid)
 
-    Object.assign(${camelCase}, dto)
+    Object.assign(${transformer.camelCase}, dto)
 
-    return await ${camelCase}.save()
+    return await ${transformer.camelCase}.save()
   }
 
-  async delete${pascalCase} (uuid: string): Promise<void> {
-    const ${camelCase} = await this.get${pascalCase}(uuid)
+  async delete${transformer.pascalCase} (uuid: string): Promise<void> {
+    const ${transformer.camelCase} = await this.get${transformer.pascalCase}(uuid)
 
-    await ${camelCase}.softRemove()
+    await ${transformer.camelCase}.softRemove()
   }
 }
 `

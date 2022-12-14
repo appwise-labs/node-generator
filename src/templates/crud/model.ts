@@ -1,18 +1,20 @@
-export const model = (_kebabCase: string, pascalCase: string, _camelCase: string): string => {
+import { CaseTransformer } from '../..'
+
+export const model = (transformer: CaseTransformer): string => {
   return `import { BaseEntity, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 @Entity()
-export class ${pascalCase} extends BaseEntity {
+export class ${transformer.pascalCase} extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   uuid: string
 
-  @CreateDateColumn()
+  @CreateDateColumn({ precision: 3 })
   createdAt: Date
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ precision: 3 })
   updatedAt: Date
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({ precision: 3 })
   deletedAt: Date | null
 }
 `

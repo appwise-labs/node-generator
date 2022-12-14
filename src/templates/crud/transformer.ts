@@ -1,25 +1,27 @@
-export const transformer = (kebabCase: string, pascalCase: string, camelCase: string): string => {
-  return `import { Transformer } from '@appwise/express-dto-router'
-import { ${pascalCase} } from '../models/${kebabCase}.model'
+import { CaseTransformer } from '../..'
 
-export interface ${pascalCase}TransformerType {
+export const transformer = (transformer: CaseTransformer): string => {
+  return `import { Transformer } from '@appwise/express-dto-router'
+import { ${transformer.pascalCase} } from '../models/${transformer.kebabCase}.model'
+
+export interface ${transformer.pascalCase}TransformerType {
   uuid: string
   createdAt: string
   updatedAt: string
   deletedAt: string | null
 }
 
-class ${pascalCase}Transformer extends Transformer<${pascalCase}, ${pascalCase}TransformerType> {
-  transform (${camelCase}: ${pascalCase}): ${pascalCase}TransformerType {
+class ${transformer.pascalCase}Transformer extends Transformer<${transformer.pascalCase}, ${transformer.pascalCase}TransformerType> {
+  transform (${transformer.camelCase}: ${transformer.pascalCase}): ${transformer.pascalCase}TransformerType {
     return {
-      uuid: ${camelCase}.uuid,
-      createdAt: ${camelCase}.createdAt.toISOString(),
-      updatedAt: ${camelCase}.updatedAt.toISOString(),
-      deletedAt: ${camelCase}.deletedAt?.toISOString() ?? null
+      uuid: ${transformer.camelCase}.uuid,
+      createdAt: ${transformer.camelCase}.createdAt.toISOString(),
+      updatedAt: ${transformer.camelCase}.updatedAt.toISOString(),
+      deletedAt: ${transformer.camelCase}.deletedAt?.toISOString() ?? null
     }
   }
 }
 
-export const ${camelCase}Transformer = new ${pascalCase}Transformer()
+export const ${transformer.camelCase}Transformer = new ${transformer.pascalCase}Transformer()
 `
 }

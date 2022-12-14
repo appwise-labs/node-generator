@@ -1,12 +1,12 @@
 {
   "name": "@appwise/node-generator",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "bin": "dist/index.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "",
   "scripts": {
-    "clean": "rm -rf ./dist",
+    "clean": "rm -rf ./dist && rm -rf ./docs/* && rm -rf ./src/components/*",
     "build": "tsc",
     "lint": "eslint src"
   },

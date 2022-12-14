@@ -1,7 +1,9 @@
-export const dto = (_kebabCase: string, pascalCase: string, _camelCase: string): string => {
+import { CaseTransformer } from '../..'
+
+export const dto = (transformer: CaseTransformer): string => {
   return `import { DTO } from '@appwise/express-dto-router'
 
-export class Create${pascalCase}DTO extends DTO {
+export class Create${transformer.pascalCase}DTO extends DTO {
 
 }
 `
